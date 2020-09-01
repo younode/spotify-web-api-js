@@ -1609,6 +1609,21 @@ declare namespace SpotifyWebApi {
      * @return {void}
      */
     setPromiseImplementation(promiseImplementation: Object): void;
+
+    /**
+     * Gets the locale.
+     *
+     * @return {string} locale
+     */
+    getLocale(): string;
+
+    /**
+     * Sets a locale to be set in header.
+     *
+     * @param {string} locale
+     * @return {void}
+     */
+    setLocale(locale: string): void;
   }
 }
 

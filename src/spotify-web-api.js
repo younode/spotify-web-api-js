@@ -8,6 +8,7 @@ var SpotifyWebApi = (function () {
   var _baseUri = 'https://api.spotify.com/v1';
   var _accessToken = null;
   var _promiseImplementation = null;
+  var _locale = null;
 
   var WrapPromiseWithAbort = function (promise, onAbort) {
     promise.abort = onAbort;
@@ -97,6 +98,10 @@ var SpotifyWebApi = (function () {
       req.open(type, _buildUrl(requestData.url, requestData.params));
       if (_accessToken) {
         req.setRequestHeader('Authorization', 'Bearer ' + _accessToken);
+      }
+
+      if (_locale) {
+        req.setRequestHeader('Accept-Language', _locale + ';q=1');
       }
 
       req.onreadystatechange = function () {
@@ -2051,6 +2056,25 @@ var SpotifyWebApi = (function () {
   Constr.prototype.setAccessToken = function (accessToken) {
     _accessToken = accessToken;
   };
+
+  /**
+   * Gets the locale.
+   *
+   * @return {string} locale
+   */
+  Constr.prototype.getLocale = function () {
+    return _locale;
+  };
+
+  /**
+   * Sets a locale to be set in header.
+   *
+   * @param {string} locale
+   * @return {void}
+   */
+  Constr.prototype.setLocale = function (locale) {
+    _locale = locale;
+  }
 
   /**
    * Sets an implementation of Promises/A+ to be used. E.g. Q, when.
